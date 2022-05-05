@@ -17,7 +17,29 @@ class Ship:
         # 设置飞船初始位置
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # 飞船的移动标记
+        self.moving_right = False
+        self.moving_left = False
+
+        # 飞船的游戏属性
+        self.speed = 2
+
     def blit_me(self):
         """绘制飞船"""
         self.screen.blit(self.image, self.rect)
+
+    def update_pos(self):
+        """移动飞船"""
+        # 左右移动
+        if self.moving_right:
+            self.rect.centerx += self.speed
+        if self.moving_left:
+            self.rect.centerx -= self.speed
+
+        # 限制出屏幕
+        if self.rect.right >= self.screen_rect.right:
+            self.rect.right = self.screen_rect.right
+        elif self.rect.left <= self.screen_rect.left:
+            self.rect.left = self.screen_rect.left
+
 
