@@ -1,30 +1,32 @@
 import pygame
-import settings
+from pygame.sprite import Sprite
 
 
-class Bullet:
-    """描述子弹的类"""
+class Bullet(Sprite):
+    """管理飞船发射子弹的类"""
+
     def __init__(self, ai_game):
-        # 访问游戏资源
+        """管理飞船发射子弹的类"""
+        # 继承父类
+        super().__init__()
+        # 游戏资源
         self.screen = ai_game.screen
-        self.screen_rect = self.screen.get_rect()
-        self.settings = settings.Settings()
-
-        # 构建自身图像和矩形
-        self.image = pygame.Surface(size=(self.settings.bullet_width, self.settings.bullet_height))
-        self.image.fill(self.settings.bullet_color)
-        self.rect = self.image.get_rect()
-
-        # 子弹自身属性
+        self.settings = ai_game.settings
+        # 自身属性
+        self.color = self.settings.bullet_color
         self.speed = self.settings.bullet_speed
-        self.rect.center = ai_game.ship.rect.center
+        # 矩形位置
+        self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
+        self.rect.midtop = ai_game.ship.rect.midtop
+        # 为小数做准备
+        self.y = float(self.rect.y)
 
-    def update_pos(self):
-        self.rect.y -= self.speed
+    def update(self):
+        """子弹向上飞"""
+        self.y -= self.settings.bullet_speed
+        self.rect.y = self.y
 
-    def blit_me(self):
-        """绘制子弹"""
-        self.screen.blit(self.image, self.rect)
-
-
+    def draw_bullet(self):
+        """在屏幕上绘制子弹"""
+        pygame.draw.rect(self.screen, self.color, self.rect)
 

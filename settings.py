@@ -11,6 +11,8 @@ class Settings:
 
         # 子弹设置
         self.bullet_color = (255, 153, 18)
-        self.bullet_width = 10
-        self.bullet_height = 25
-        self.bullet_speed = 2
+        self.bullet_width = 3
+        self.bullet_height = 15
+
+        self.bullet_speed = 0.8
+        self.bullet_allowed = 3
