@@ -1,4 +1,5 @@
 import pygame.image
+from bullet import Bullet
 
 
 class Ship:
@@ -24,6 +25,8 @@ class Ship:
 
         # 飞船的游戏属性
         self.x = float(self.rect.x)
+        self.bullets = []
+        self.bullet = None
 
     def blit_me(self):
         """绘制飞船"""
@@ -38,5 +41,8 @@ class Ship:
             self.x -= self.setting.ship_speed
         # 根据self.x更新rect对象
         self.rect.x = self.x
+
+
+
 
 

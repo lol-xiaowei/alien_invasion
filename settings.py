@@ -9,3 +9,8 @@ class Settings:
         # 飞船设置
         self.ship_speed = 1.8
 
+        # 子弹设置
+        self.bullet_color = (255, 153, 18)
+        self.bullet_width = 10
+        self.bullet_height = 25
+        self.bullet_speed = 2

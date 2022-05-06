@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class AlienInvasion:
@@ -26,11 +27,15 @@ class AlienInvasion:
         # 设置标题
         pygame.display.set_caption("外星人入侵！")
 
+        # 设置颜色
+        self.bg_color = self.settings.bg_color
+
         # 创建飞船
         self.ship = Ship(self)
 
-        # 设置颜色
-        self.bg_color = self.settings.bg_color
+        # 创建子弹
+        self.bullets = []
+        self.bullet = Bullet(self)
 
     def run_game(self):
         """开始游戏主循环"""
@@ -61,6 +66,11 @@ class AlienInvasion:
             self.ship.moving_right = True
         if event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        # 飞船开火
+        if event.key == pygame.K_SPACE:
+            self.bullet = Bullet(self)
+            self.bullets.append(self.bullet)
+
 
     def _check_keyup_events(self, event):
         """响应松开键"""
@@ -79,6 +89,9 @@ class AlienInvasion:
         self.screen.fill(self.bg_color)
         self.ship.update_pos()
         self.ship.blit_me()
+        for bul in self.bullets:
+            bul.update_pos()
+            bul.blit_me()
 
         # 切换到新屏幕
         pygame.display.flip()
