@@ -1,12 +1,12 @@
 import pygame.image
 from bullet import Bullet
+from pygame.sprite import Sprite
 
-
-class Ship:
+class Ship(Sprite):
     """飞船类"""
     def __init__(self, ai_game):
         """初始化飞船并设置初始位置"""
-
+        super().__init__()
         # 使飞船可以访问任意游戏资源
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
@@ -27,6 +27,12 @@ class Ship:
         self.x = float(self.rect.x)
         self.bullets = []
         self.bullet = None
+
+    def center_ship(self):
+        """飞船居中"""
+        # 可以发现这种兼容小数的写法容易出bug
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
 
     def blit_me(self):
         """绘制飞船"""

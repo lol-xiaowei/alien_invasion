@@ -9,7 +9,7 @@ class Alien(Sprite):
         super().__init__()
         # 资源
         self.screen = ai_game.screen
-        self.image = pygame.image.load('images/alien.bmp')
+        self.image = pygame.image.load('images/kriswu.jpeg')
         self.rect = self.image.get_rect()
         # 属性
         self.settings = ai_game.settings
